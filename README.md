@@ -1,6 +1,6 @@
 # LoftSims CollegeGAS
 
-Created for Sudheendra Pai. Version 1.1.0.
+Created for Sudheendra Pai. Version 1.2.0.
 
 An interactive UC undergraduate cost, grant, scholarship, and financial aid dashboard built with plain HTML, CSS, JavaScript, and SVG. No build step or external dependencies.
 
@@ -24,3 +24,8 @@ Cost estimates cover the 2026–27 entering cohort; source checks are dated Octo
 UC San Diego budgets and UC Santa Barbara off-campus/family budgets require manual entry where verified figures were unavailable. Further source and calculation notes appear in the dashboard. Inputs are not persisted between sessions.
 
 JavaScript syntax and calculation checks passed. Full browser visual QA and the optional WebMCP integration were not validated.
+
+
+## v1.2.0
+
+Adds named funding-program contribution audit trails and downloadable JSON scenario evidence. UC Berkeley grant inventory is now explicitly represented; student-specific amounts are never fabricated when an official universal dollar amount is unavailable. Further UC campus inventories are being populated from official campus sources.
