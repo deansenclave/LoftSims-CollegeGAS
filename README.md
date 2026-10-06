@@ -1,6 +1,6 @@
 # LoftSims CollegeGAS
 
-Created for Sudheendra Pai. Version 1.2.0.
+Created for Sudheendra Pai. Version 1.3.0.
 
 An interactive UC undergraduate cost, grant, scholarship, and financial aid dashboard built with plain HTML, CSS, JavaScript, and SVG. No build step or external dependencies.
 
@@ -29,3 +29,8 @@ JavaScript syntax and calculation checks passed. Full browser visual QA and the 
 ## v1.2.0
 
 Adds named funding-program contribution audit trails and downloadable JSON scenario evidence. UC Berkeley grant inventory is now explicitly represented; student-specific amounts are never fabricated when an official universal dollar amount is unavailable. Further UC campus inventories are being populated from official campus sources.
+
+
+## v1.3.0
+
+Adds student eligibility inputs and an eligibility-driven funding rules engine. Quantified federal/state grant rules are evaluated from the entered profile, named contributions are exposed in the UI, and the complete student profile plus program evidence is included in downloadable JSON. Campus-calculated awards remain explicitly marked rather than fabricated.
