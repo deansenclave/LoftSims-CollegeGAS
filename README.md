@@ -1,6 +1,6 @@
 # LoftSims CollegeGAS
 
-Created for Sudheendra Pai. Version 1.3.0.
+Created for Sudheendra Pai. Version 1.4.0.
 
 An interactive UC undergraduate cost, grant, scholarship, and financial aid dashboard built with plain HTML, CSS, JavaScript, and SVG. No build step or external dependencies.
 
@@ -21,7 +21,7 @@ Download the repository and open `index.html` in a browser, or serve the reposit
 
 Cost estimates cover the 2026–27 entering cohort; source checks are dated October 5, 2026. Awards and eligibility depend on individual circumstances. Modeled awards are scenarios, not financial aid offers. Loans and work-study are shown separately from grants and scholarships.
 
-UC San Diego budgets and UC Santa Barbara off-campus/family budgets require manual entry where verified figures were unavailable. Further source and calculation notes appear in the dashboard. Inputs are not persisted between sessions.
+All exposed campus/housing selections now resolve to a numeric expense baseline. Values are represented from published fixed amounts, tables, or formulas; source and calculation notes appear in the dashboard. Inputs are not persisted between sessions.
 
 JavaScript syntax and calculation checks passed. Full browser visual QA and the optional WebMCP integration were not validated.
 
@@ -34,3 +34,8 @@ Adds named funding-program contribution audit trails and downloadable JSON scena
 ## v1.3.0
 
 Adds student eligibility inputs and an eligibility-driven funding rules engine. Quantified federal/state grant rules are evaluated from the entered profile, named contributions are exposed in the UI, and the complete student profile plus program evidence is included in downloadable JSON. Campus-calculated awards remain explicitly marked rather than fabricated.
+
+
+## v1.4.0
+
+Resolves the previously unknown UC San Diego and UC Santa Barbara housing expense combinations so exposed scenarios produce numeric annual expenses. UCSB uses its official 2026–27 cohort table; UCSD retains an explicit source/model note where its official budget is interactive.
