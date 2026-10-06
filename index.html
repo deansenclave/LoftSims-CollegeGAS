@@ -52,9 +52,9 @@ function total(){return state.expenses.length?sum(state.expenses)+(state.r==='nr
 function model(){let cost=total(),a={...state.aid};Object.keys(a).forEach(k=>a[k]=a[k]||0);if(state.mode==='full'&&cost!==null){a.scholarships=Math.max(0,cost-(state.r==='nr'?39270:0)-a.grants)}let gift=a.grants+a.scholarships,aid=gift+a.loans+a.work,all=aid+a.family;return {cost,a,gift,aid,all,net:cost===null?null:Math.max(0,cost-gift),gap:cost===null?null:Math.max(0,cost-all),pct:cost>0?Math.min(100,gift/cost*100):0}}
 function resetAid(){state.aid=Object.fromEntries(aidDefs.map(a=>[a[0],null]));state.mode=null;aidDefs.forEach(([id])=>$(id).value='');['zeroScenario','minScenario','maxScenario'].forEach(id=>$(id)?.classList.remove('active'));$('scenarioBasis').textContent='Choose a scenario or enter your own aid figures.'}
 const federalStatePrograms=[
-{name:'Federal Pell Grant',category:'Grant',max:7395,rule:p=>p.fafsa&&p.sai<=6655,note:'2026–27 maximum scheduled Pell award; actual award depends on SAI, enrollment intensity and cost of attendance.',source:'https://studentaid.gov/understand-aid/types/grants/pell'},
-{name:'Cal Grant A tuition/fees',category:'Grant',max:15588,rule:p=>p.caResident&&p.fafsa&&p.gpa>=3&&p.stage==='freshman',note:'UC systemwide tuition/fee award model; final CSAC award and eligibility control.',source:'https://www.csac.ca.gov/cal-grants'},
-{name:'Federal SEOG — Berkeley rule',category:'Grant',max:300,campuses:['berkeley'],rule:p=>p.fafsa&&p.sai===-1500&&p.fullTime,note:'Berkeley publishes up to $300/year for eligible students with SAI -1500, subject to funds.',source:'https://financialaid.berkeley.edu/types-of-aid-at-berkeley/grants/federal-supplemental-educational-opportunity-grant-seog/'}
+{name:'Federal Pell Grant',category:'Grant',min:740,max:7395,rule:p=>p.fafsa&&p.sai<14790,note:'2026–27 maximum scheduled Pell award; actual award depends on SAI, enrollment intensity and cost of attendance.',source:'https://studentaid.gov/understand-aid/types/grants/pell'},
+{name:'Cal Grant A tuition/fees',category:'Grant',min:15588,max:15588,rule:p=>p.caResident&&p.fafsa&&p.gpa>=3&&p.stage==='freshman',note:'UC systemwide tuition/fee award model; final CSAC award and eligibility control.',source:'https://www.csac.ca.gov/cal-grants'},
+{name:'Federal SEOG — Berkeley rule',category:'Grant',min:100,max:300,campuses:['berkeley'],rule:p=>p.fafsa&&p.sai===-1500&&p.fullTime,note:'Berkeley publishes up to $300/year for eligible students with SAI -1500, subject to funds.',source:'https://financialaid.berkeley.edu/types-of-aid-at-berkeley/grants/federal-supplemental-educational-opportunity-grant-seog/'}
 ];
 const campusGrantPrograms={
 berkeley:[
@@ -77,9 +77,9 @@ function applyPreset(kind){
  if(kind==='max'){scholarship=fixed.length?Math.max(...fixed):0;basis=fixed.length?'MAXIMUM: largest published fixed-dollar matching campus scholarship; grants remain $0 because campus need-based grants have no universal published maximum.':'MAXIMUM: no fixed-dollar matching scholarship can be quantified; campus need-based grants remain student-specific.';}
  state.aid={grants:0,scholarships:scholarship,loans:0,work:0,family:0}; state.mode='preset-'+kind;
  state.programs=[];
- let eligible=eligibleGrantPrograms(); let grantContribution=kind==='zero'?0:eligible.reduce((n,p)=>n+(p.max||0),0);
+ let eligible=eligibleGrantPrograms(); let grantContribution=kind==='zero'?0:eligible.reduce((n,p)=>n+(kind==='min'?(p.min??p.max??0):(p.max||0)),0);
  state.aid.grants=grantContribution;
- eligible.forEach(p=>state.programs.push({...p,amount:p.max,contribution:kind==='zero'?0:p.max,status:kind==='zero'?'Zero scenario':'Eligible under entered profile'}));
+ eligible.forEach(p=>{let v=kind==='zero'?0:(kind==='min'?(p.min??p.max??0):(p.max||0));state.programs.push({...p,amount:kind==='min'?(p.min??p.max):p.max,contribution:v,status:kind==='zero'?'Zero scenario':'Eligible under entered profile'})});
  (campusGrantPrograms[state.c]||[]).forEach(p=>state.programs.push({...p,contribution:0,status:kind==='zero'?'Zero scenario':'Requires campus-specific award calculation / eligibility'}));
  publishedMatches().forEach(a=>state.programs.push({name:a.name,category:'Scholarship',amount:a.amount??null,contribution:(a.amount===scholarship&&scholarship>0)?scholarship:0,status:a.amount===scholarship&&scholarship>0?'Contributing':'Not selected in this scenario',source:a.url}));
  aidDefs.forEach(([id])=>$(id).value=state.aid[id]);
