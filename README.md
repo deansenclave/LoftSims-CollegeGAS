@@ -1,6 +1,6 @@
 # LoftSims CollegeGAS
 
-Created for Sudheendra Pai. Version 1.0.0.
+Created for Sudheendra Pai. Version 1.1.0.
 
 An interactive UC undergraduate cost, grant, scholarship, and financial aid dashboard built with plain HTML, CSS, JavaScript, and SVG. No build step or external dependencies.
 
@@ -14,6 +14,7 @@ Download the repository and open `index.html` in a browser, or serve the reposit
 - Filter Mechanical Engineering, Electrical Engineering, Applied Mathematics, Physics, or AI/Computing.
 - Change residency and housing, edit annual expenses, and enter grants, scholarships, loans, work-study, and family contributions.
 - Compare total expenses, gift aid coverage, total modeled funding, and the remaining gap.
+- Model ZERO, MINIMUM, and MAXIMUM published fixed-dollar scholarship scenarios for the selected campus/subject. Need-based campus grants remain student-specific when no universal published maximum exists.
 - Follow official campus scholarship and cost sources linked inside the dashboard.
 
 ## Data scope
